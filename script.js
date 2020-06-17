@@ -25,33 +25,31 @@ function runQuery(numArticles, queryURL) {
         method: "GET"
       }).done(function(NYTData) {
 
+        // Clear the wells from the previous run 
+        $('#wellSection').empty();
+
         for (var i = 0; i < numArticles; i++) {
-            console.log(NYTData.response.docs[i].headline.main);
-            console.log(NYTData.response.docs[i].section_name);
-            console.log(NYTData.response.docs[i].pub_date);
-            console.log(NYTData.response.docs[i].byline.original)
-            console.log(NYTData.response.docs[i].web_url);
 
             // Start sending to HTML here 
-
             var wellSection = $('<div>');
             wellSection.addClass("well");
             wellSection.attr('id', 'articleWell-' + i);
             $('#wellSection').append(wellSection);
 
+            
             // Attach the content to the appropriate well 
             $('#articleWell-' + i).append("<h3>" + NYTData.response.docs[i].headline.main + "</h3>");
             $('#articleWell-' + i).append("<h5>" + NYTData.response.docs[i].section_name + "</h5>");
             $('#articleWell-' + i).append("<h5>" + NYTData.response.docs[i].pub_date + "</h5>");
-            $('#articleWell-' + i).append("<h5>" + NYTData.response.docs[i].byline.original + "</h5>");
-            $('#articleWell-' + i).append("<a href=" + NYTData.response.docs[i].web_url + " >" + NYTData.response.docs[i].web_url + "</a>");
+
+            // Check if byline exists 
+            if (NYTData.response.docs[i].byline && NYTData.response.docs[i].byline.hasOwnProperty("original")) {
+                $('#articleWell-' + i).append("<h5>" + NYTData.response.docs[i].byline.original + "</h5>");
+            }
+            
+            $('#articleWell-' + i).append("<a target='_blank' href=" + NYTData.response.docs[i].web_url + " >" + NYTData.response.docs[i].web_url + "</a>");
         }
         
-        
-        // Logging Data to Console 
-        console.log(queryURL);
-        console.log(numArticles);
-        console.log(NYTData);
       })
 
 }
@@ -93,11 +91,3 @@ $('#searchBtn').on('click', function () {
     runQuery(numResults, newURL)
     return false;
 })
-
-
-// 1. Retrieve user inputs and convert to variables 
-// 2. Use those variables to run an AJAX call to the New York Times 
-// 3. Break down the NYT object into usable fields 
-// 4. Dynamically generate html content 
-
-// 5. Dealing with "edge cases"
