@@ -14,5 +14,5 @@ This project is powered by jQuery and built by HTML & Bootstrap.
 ### Preview 
 ***
 
-![]()
+![NYT_demo](assets/NYT_demo.gif)
 
