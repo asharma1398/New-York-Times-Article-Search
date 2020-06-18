@@ -91,3 +91,8 @@ $('#searchBtn').on('click', function () {
     runQuery(numResults, newURL)
     return false;
 })
+
+// Clear all page content 
+$('#clearBtn').on('click', function () {
+    location.reload();
+})
