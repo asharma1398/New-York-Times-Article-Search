@@ -1,0 +1,7 @@
+@media screen and (max-width: 500) {
+    
+    .NYTlink {
+        width: 40%;
+        font-size: 3px !important; 
+    }
+}

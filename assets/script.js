@@ -47,7 +47,7 @@ function runQuery(numArticles, queryURL) {
                 $('#articleWell-' + i).append("<h5>" + NYTData.response.docs[i].byline.original + "</h5>");
             }
             
-            $('#articleWell-' + i).append("<a target='_blank' href=" + NYTData.response.docs[i].web_url + " >" + NYTData.response.docs[i].web_url + "</a>");
+            $('#articleWell-' + i).append("<a style='font-size: 12px !important;' target='_blank' href=" + NYTData.response.docs[i].web_url + " >" + NYTData.response.docs[i].web_url + "</a>");
         }
         
       })
